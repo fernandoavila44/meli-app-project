@@ -1,0 +1,75 @@
+.detailProduct{
+    max-width: 70rem;
+    width: 70%;
+    color: #333333;
+}
+
+.detailWrapper{
+    display: flex;
+    padding: 2rem;    
+}
+
+.productImgDesc{
+    width: 70%;
+}
+
+.imgProduct{
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.imgProduct img{
+    display: block;
+}
+
+.productImgDesc div h2{
+    font-size: 28px;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+.productImgDesc div p{
+    color: #999999;
+}
+
+.productInfo{
+    width: 30%;
+}
+
+.productInfo > span:first-child{
+    font-size: 14px;
+}
+
+.productInfo h2{
+    font-size: 24px;
+    margin-top: 1rem;
+}
+
+.currencyDetails{
+    margin: 2rem 0;
+    font-size: 46px;
+}
+
+.currencyDetails span:nth-last-child(2){
+    font-size: 20px;
+}
+
+.currencyDetails span img{
+    margin-left: 1rem;
+}
+
+.productInfo button{
+    border: none;
+    border-radius: 4px;
+    background-color: #3483fa;
+    padding: 0.7rem;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+
+
+

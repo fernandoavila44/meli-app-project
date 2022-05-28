@@ -1,0 +1,9 @@
+.products{
+    max-width: 70rem;
+    width: 70%;
+}
+.products ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}

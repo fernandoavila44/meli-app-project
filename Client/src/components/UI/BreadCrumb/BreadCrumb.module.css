@@ -1,0 +1,20 @@
+.breadCrumb{
+    color: #999999;
+    display: flex;
+    margin: 1rem 0;
+    max-width: 70rem;
+    width: 70%;
+    text-align: left;
+    list-style: none;
+}
+
+.breadCrumb li{
+    font-size: 14px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.spanTransparent{
+    color: transparent;
+    margin: 1rem 0;
+}
