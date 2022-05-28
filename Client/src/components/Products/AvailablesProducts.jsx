@@ -12,26 +12,26 @@ const AvailablesProducts = () => {
 
     const [dataItems, setDataItems] = useState([]);
     const [dataCategories, setDataCategories] = useState([]);
-    const [isLoadding, setIsLoadding] = useState(true);
+    const [isLoadding, setIsLoadding] = useState(false);
     const [error, setError] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    // const product = searchParams.get('search');
+    const product = searchParams.get('search');
 
     const searchCtx = useContext(SearchContext)
 
     useEffect(() => {
-     
+
         const searchItemHandler = async () => {
             setDataItems([])
             setIsLoadding(true)
-            setSearchParams({ search: searchCtx.product})
+            setSearchParams({ search: searchCtx.product || product})
             try {
                 const response = await fetch('http://localhost:4747/api/items', {
                     method: 'POST',
                     mode: 'cors',
                     body: JSON.stringify({
-                        item: searchCtx.product,
+                        item: searchCtx.product || product,
                     }),
                     headers: {
                         'Content-Type': 'application/json'
@@ -55,7 +55,8 @@ const AvailablesProducts = () => {
             setIsLoadding(false)
         }
         searchItemHandler()
-    }, [searchCtx.product, setSearchParams])
+
+    }, [searchCtx.product, setSearchParams, product])
 
     const itemsList =
         <ul>{
@@ -74,7 +75,6 @@ const AvailablesProducts = () => {
             ))
         }
         </ul>
-
 
     let display = <>
         <BreadCrumb categories={dataCategories} />
