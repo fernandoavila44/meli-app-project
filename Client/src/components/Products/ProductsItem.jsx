@@ -16,7 +16,7 @@ const ProductsItem = props =>{
         <li onClick={clickItemHandler} className={classes.itemWrapper}>
             <div className={classes.infoItemGeneral}>
                 <div>
-                    <img className={classes.imgProduct} src={props.picture} alt="iteamSearchImg"/>
+                    <img className={classes.imgProduct} src={props.picture} alt={props.title}/>
                 </div>
                 <div className={classes.dataProduct}>
                     <div>

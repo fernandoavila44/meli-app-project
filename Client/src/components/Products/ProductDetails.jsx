@@ -4,7 +4,9 @@ import Card from "../UI/Card/Card"
 import classes from "./ProductDetails.module.css";
 import freeShipping from '../../assets/ic_shipping.png';
 import BreadCrumb from "../UI/BreadCrumb/BreadCrumb";
+import GalleryImages from "../UI/GalleryImages/GalleryImages";
 import Spinner from "../Spinner/Spinner";
+import Errors from "../Errors/Errors";
 
 const ProductDetails = () => {
 
@@ -60,9 +62,7 @@ const ProductDetails = () => {
                     <Card>
                         <div className={classes.detailWrapper}>
                             <div className={classes.productImgDesc}>
-                                <div className={classes.imgProduct}>
-                                    <img src={item.item.picture} alt="" />
-                                </div>
+                                <GalleryImages arrayImages={item.item.picture} />
                                 <div>
                                     <h2>Descripcion del producto</h2>
                                     <p>{item.item.description}</p>
@@ -86,7 +86,7 @@ const ProductDetails = () => {
                     </Card>
                 </section>
             </> :
-            error ? <p>{error}</p> :''}
+            error ? <Errors message={error} /> :''}
         </main>
     )
 }

@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Documentación desafío técnico FrontEnd Mercadolibre  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicacion web que permite consultar productos disponibles en la tienda oficial de mercadolibre Argentina y los muestra en pantalla para que el usuario pueda seleccionar cualquier producto y ver informacion mas detallada.
 
-## Available Scripts
+## Tecnologias utilizadas
 
-In the project directory, you can run:
+### FrontEnd:
 
-### `npm start`
+HTML/
+CSS/
+ReactJs/
+React Router/
+CSS Modules
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Backend:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+NodeJs/ 
+Express Js/
+Axios
 
-### `npm test`
+## Funcionamiento
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Se implementaron tres vistas que pueden ser navegadas de manera independiente, la primera vista es la barra de búsqueda para ingresar el producto a buscar y la tercera vista nos muestra en pantalla información más detallada del producto seleccionado.  
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+En el frontend se utilizó como tecnología principal ReactJs, adicional se implementó ReactRouter para el control de navegación de las diferentes vistas, para el manejo de estilos se utilizó CSS Modules para tener mayor control en los estilos implementados, las 3 vistas con su respectivas rutas se muestran a continuación:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```javascript
+function App() {
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+	return (
+		<SearchProvider>
+		<BrowserRouter>
+			<Routes>
+				<Route path='/' element={<Home/>}>
+					<Route path='/items' element={<AvailablesProducts/>}/>
+					<Route path='/items/:id' element={<ProductDetails/>}/>
+				</Route>
+				<Route path='*' element={<NoMatch />} />
+			</Routes>
+		</BrowserRouter>
+		</SearchProvider>
+	);
+}
+```
+Se implemento un Context para tener disponible de manera global el producto que ingresa el usuario en la barra de búsqueda, esto con el fin de poder utilizarlo en la segunda vista donde se cargan los productos que devuelve el servidor.
 
-### `npm run eject`
+```javascript
+const SearchProvider = props =>{
+    const [product, setProduct] = useState('')
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    const productTOSearch = (product) =>{
+        setProduct(product)
+    }
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    const searchContext = {
+        product: product,
+        ToSearch: productTOSearch
+    }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    return(
+        <SearchContext.Provider value={searchContext}>
+            {props.children}
+        </SearchContext.Provider>
+    )
+}
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+La primera vista se encuentra en el componente "SearchBar.jsx" nos permite ingresar el producto a buscar y ejecutar una búsqueda, se implementó validación para que solo se realice la búsqueda si se ingresan datos en el input, en esta vista se almacena en el Context el producto a buscar. 
 
-## Learn More
+la segunda vista se encuentra en el componente "AvailablesProducts" nos muestra en pantalla la información consultada, cabe mencionar que solo se listan 4 productos pero esto es debido a la solicitud del requerimiento, desde el servidor se puede modificar la cantidad de ítems que se envían como respuesta al front, en esta vista se genera la url como se solicita en el requerimiento (Resultados de la búsqueda: “/items?search=”), y finaliza con el nombre del producto que ingresamos en la barra de búsqueda, en este punto se utilizó el dato almacenado en el Context para poder mediante el hook useSearchParams() generar la ruta, estando ubicados en esta vista si digitamos el nombre de otro producto en la URL por ejemplo (http://localhost:3000/items?search=iphone) nos traerá en pantalla los productos referentes a esa nueva búsqueda.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Los ítems listados en la vista de resultado de la búsqueda nos muestra información relacionada a cada producto, se muestra una imagen del producto, el precio según la divisa de cada producto, si este cuenta con envió gratis se mostrara un icono indicándolo y la ubicación, cada uno de los ítems listados se renderiza en un componente llamado "ProductsItem", este componente está habilitado para que el usuario haga click sobre él y se muestre la información detalla del producto en una tercera vista.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+La tercera vista se encuentra en el archivo "ProductDetails", esta vista tiene su propia URL por ejemplo (http://localhost:3000/items/MLA931455240), en la URL podemos visualizar el id del producto que se está detallando además renderiza la información relacionada al producto, se implementó que también se puedan hacer consultas modificando el id del producto directamente en la URL.
 
-### Code Splitting
+En esta tercera vista se implementó un módulo que muestra una imagen principal del producto y activa una galería en la cual se cargan otras imágenes referentes a este mismo producto, el usuario puede colocar el cursor sobre cualquiera de las imágenes y automáticamente se actualizara la imagen principal por la que el usuario quiera visualizar.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Se implemento un componente que permite generar los BreadCrumbs de cada búsqueda de producto y a su vez de cada detalle del producto, este componente se renderiza individualmente en la segunda y tercera vista.
 
-### Analyzing the Bundle Size
+De igual forma se implementó un componente spinner para mostrar un spinner de carga mientras se realiza el proceso de consulta de data y renderizado, para el manejo de renderizado de los errores se implementó un componente que se mostrara si por ejemplo no se obtuvieron resultados para una búsqueda de un producto o si se ingresó el id erróneo de un producto en la barra de búsqueda.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

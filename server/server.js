@@ -180,7 +180,8 @@ app.post("/id", (req, res) => {
                             "amount": getItemInfo.data[0].body.price,
                             "decimals": 0
                         },
-                        "picture": getItemInfo.data[0].body.pictures[0].url,
+                        // "picture": getItemInfo.data[0].body.pictures[0].url,
+                        "picture": getItemInfo.data[0].body.pictures,
                         "condition": getItemInfo.data[0].body.condition,
                         "free_shipping": getItemInfo.data[0].body.shipping.free_shipping,
                         "sold_quantity": getItemInfo.data[0].body.sold_quantity,

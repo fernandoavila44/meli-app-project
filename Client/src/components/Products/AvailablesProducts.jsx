@@ -6,6 +6,7 @@ import classes from "./AvailablesProducts.module.css";
 import BreadCrumb from "../UI/BreadCrumb/BreadCrumb";
 import SearchContext from "../../store/SearchContext";
 import Spinner from "../Spinner/Spinner";
+import Errors from "../Errors/Errors";
 
 
 const AvailablesProducts = () => {
@@ -89,7 +90,7 @@ const AvailablesProducts = () => {
         <main>
             {isLoadding ? <Spinner /> :
                 dataItems.length > 0 ? display :
-                    error ? <p>{error}</p> : ''}
+                    error ? <Errors message={error} />: ''}
         </main>
     )
 }

@@ -1,0 +1,37 @@
+.galleryModule{
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainImage{
+    display: flex;
+    justify-content: center; 
+}
+
+.mainImage img{
+    height: 500px;
+    width: 500px;
+    object-fit: contain;
+}
+
+.gallery{
+    margin-top: 3rem;
+}
+
+.gallery ul{
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.gallery ul img{
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    display: block;
+    border: 1px #EEEEEE solid;
+    border-radius: 6px;
+    cursor: pointer;
+}
