@@ -16,6 +16,28 @@ CSS Modules/
 
 NodeJs/ Express Js/ Axios
 
+## Instalación / Instrucciones 
+
+Clonar el repositorio en tu máquina. necesitaras tener instalado node y npm instalado globalmente en tu máquina.
+
+### Instalación:
+
+npm install ubicado en la carpeta client y en la carpeta server.
+
+### Iniciar el servidor 
+
+para iniciar el servidor de React, ubicarse en la carpeta Client en terminal y ingresar npm start, tener en cuenta que el puerto 4747 debe estar libre si no, puedes utilizar otro puerto de tu preferencia.
+
+para iniciar el servidor de NodeJs, ubicarse en la carpeta Server en terminal y ingresar node server.js o nodemon server.js si lo tienes instalado
+
+### Para visitar las diferentes vistas
+
+localhost:3000/ 
+
+localhost:3000/items?search=iphone
+
+localhost:3000/items/MLA931455240
+
 ## Funcionamiento
 
 Se implementaron tres vistas que pueden ser navegadas de manera independiente, la primera vista es la barra de búsqueda para ingresar el producto a buscar y la tercera vista nos muestra en pantalla información más detallada del producto seleccionado.  
@@ -77,6 +99,20 @@ En esta tercera vista se implementó un módulo que muestra una imagen principal
 Se implemento un componente que permite generar los BreadCrumbs de cada búsqueda de producto y a su vez de cada detalle del producto, este componente se renderiza individualmente en la segunda y tercera vista.
 
 De igual forma se implementó un componente spinner para mostrar un spinner de carga mientras se realiza el proceso de consulta de data y renderizado, para el manejo de renderizado de los errores se implementó un componente que se mostrara si por ejemplo no se obtuvieron resultados para una búsqueda de un producto o si se ingresó el id erróneo de un producto en la barra de búsqueda.
+
+En el archivo server.js se detalla la lógica que se implementó en cada una de las partes del código que realizan las funciones más importante.
+
+## Screenshots
+
+![Alt text](./src/assets/Screenshots/Barra%20busqueda.PNG?raw=true "Barra de busqueda")
+
+![Alt text](./src/assets/Screenshots/Resultado%20de%20busqueda.PNG?raw=true "Resultado de busqueda")
+
+![Alt text](./src/assets/Screenshots/Detalle%20de%20producto.PNG?raw=true "Detalle de producto")
+
+![Alt text](./src/assets/Screenshots/Resultado%20busqueda%20item%20inexistente.PNG?raw=true "Barra de busqueda item inexistente")
+
+![Alt text](./src/assets/Screenshots/Acceso%20ruta%20inexistente.PNG?raw=true "Acceso a ruta inexistente")
 
 ## Reflexion
 
