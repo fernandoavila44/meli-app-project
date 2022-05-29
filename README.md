@@ -105,19 +105,19 @@ En el archivo server.js se detalla la lógica que se implementó en cada una de 
 ## Screenshots
 
 ### Barra de busqueda
-![Alt text](./src/assets/Screenshots/Barra%20busqueda.PNG?raw=true "Barra de busqueda")
+![Alt text](./Client/src/assets/Screenshots/Barra%20busqueda.PNG?raw=true "Barra de busqueda")
 
 ### Resultado de busqueda
-![Alt text](./src/assets/Screenshots/Resultado%20de%20busqueda.PNG?raw=true "Resultado de busqueda")
+![Alt text](./Client/src/assets/Screenshots/Resultado%20de%20busqueda.PNG?raw=true "Resultado de busqueda")
 
 ### Detalle de producto
-![Alt text](./src/assets/Screenshots/Detalle%20de%20producto.PNG?raw=true "Detalle de producto")
+![Alt text](./Client/src/assets/Screenshots/Detalle%20de%20producto.PNG?raw=true "Detalle de producto")
 
 ### Barra de busqueda item inexistente
-![Alt text](./src/assets/Screenshots/Resultado%20busqueda%20item%20inexistente.PNG?raw=true "Barra de busqueda item inexistente")
+![Alt text](./Client/src/assets/Screenshots/Resultado%20busqueda%20item%20inexistente.PNG?raw=true "Barra de busqueda item inexistente")
 
 ### Acceso a ruta inexistente
-![Alt text](./src/assets/Screenshots/Acceso%20ruta%20inexistente.PNG?raw=true "Acceso a ruta inexistente")
+![Alt text](./Client/src/assets/Screenshots/Acceso%20ruta%20inexistente.PNG?raw=true "Acceso a ruta inexistente")
 
 ## Reflexion
 
