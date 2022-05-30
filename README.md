@@ -26,9 +26,9 @@ npm install ubicado en la carpeta client y en la carpeta server.
 
 ### Iniciar el servidor 
 
-para iniciar el servidor de React, ubicarse en la carpeta Client en terminal y ingresar npm start, tener en cuenta que el puerto 4747 debe estar libre si no, puedes utilizar otro puerto de tu preferencia.
+para iniciar el servidor de React, ubicarse en la carpeta Client en terminal y ingresar npm start
 
-para iniciar el servidor de NodeJs, ubicarse en la carpeta Server en terminal y ingresar node server.js o nodemon server.js si lo tienes instalado
+para iniciar el servidor de NodeJs, ubicarse en la carpeta Server en terminal y ingresar node server.js o nodemon server.js si lo tienes instalado, tener en cuenta que el puerto 4747 debe estar libre si no, puedes utilizar otro puerto de tu preferencia.
 
 ### Para visitar las diferentes vistas
 
