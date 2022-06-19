@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
+
 import Card from "../UI/Card/Card"
 import classes from "./ProductDetails.module.css";
 import freeShipping from '../../assets/ic_shipping.png';
 import BreadCrumb from "../UI/BreadCrumb/BreadCrumb";
 import GalleryImages from "../UI/GalleryImages/GalleryImages";
-import Spinner from "../Spinner/Spinner";
-import Errors from "../Errors/Errors";
+import Spinner from "../UI/Spinner/Spinner";
+import Errors from "../UI/Errors/Errors";
+
+import { detailItem } from "../../Services/Services";
 
 const ProductDetails = () => {
 
@@ -17,36 +20,23 @@ const ProductDetails = () => {
     const { id } = useParams()
 
     useEffect(() => {
-        
-        const detailsItemHandler = async () => {
-            setIsLoadding(true)
-            try {
-                const response = await fetch(`http://localhost:4747/id`, {
-                    method: 'POST',
-                    mode: 'cors',
-                    body: JSON.stringify({
-                        id: id
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                })
-                if (!response.ok) {
-                    throw new Error(`Something went wrong, Error ${response.status}`)
-                }
-                const data = await response.json()
 
-                if (data.item.id === 'Not Found'){
+        const detailsItemHandler = async() =>{
+            try {
+                setIsLoadding(true)
+                const response = await detailItem(id)
+                
+                if (response.item.id === 'Not Found'){
                     throw new Error(`No hay publicaciones que coincidan con tu búsqueda.`)
                 }else{
-                    setItem(data)
+                    setItem(response)
                 }
-
             } catch (error) {
                 setError(error.message)
             }
             setIsLoadding(false)
         }
+
         detailsItemHandler()
   
     }, [id])
@@ -54,7 +44,7 @@ const ProductDetails = () => {
     const priceFormat = item && new Intl.NumberFormat('es-AR', { style: 'currency', currency: `${item.item.price.currency}`, maximumFractionDigits: 0 }).format(item.item.price.amount)
 
     return (
-        <main>
+        <>
             {isLoadding ? <Spinner/>:
             item ? <>
                 <BreadCrumb categories={item.categories} />
@@ -87,7 +77,7 @@ const ProductDetails = () => {
                 </section>
             </> :
             error ? <Errors message={error} /> :''}
-        </main>
+        </>
     )
 }
 

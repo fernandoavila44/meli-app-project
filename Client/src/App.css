@@ -9,13 +9,6 @@
     font-family: 'Roboto', sans-serif;
   }
 
-  main{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding-bottom: 5rem;
-}
-
 h1{
   display: none;
 }

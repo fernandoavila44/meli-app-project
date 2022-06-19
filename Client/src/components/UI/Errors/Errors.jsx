@@ -1,4 +1,4 @@
-import Card from "../UI/Card/Card"
+import Card from "../Card/Card"
 import classname from './Errors.module.css'
 
 const Errors = props =>{

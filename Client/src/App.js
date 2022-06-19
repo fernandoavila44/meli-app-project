@@ -1,26 +1,22 @@
-import { BrowserRouter, Routes, Route, } from "react-router-dom";
-import Home from './components/router/Home';
-import NoMatch from './components/router/NoMatch'
-import AvailablesProducts from './components/Products/AvailablesProducts';
-import ProductDetails from './components/Products/ProductDetails';
-import SearchProvider from "./store/SearchCartProvider";
+import { Routes, Route, } from "react-router-dom";
+import SearchResult from "./components/pages/SearchResult";
+import Details from "./components/pages/Details";
+import NoMatch from './components/pages/NoMatch'
 import './App.css';
+import Layout from "./components/layout/Layout";
 
 
 function App() {
 
 	return (
-		<SearchProvider>
-		<BrowserRouter>
+		<Layout>
 			<Routes>
-				<Route path='/' element={<Home/>}>
-					<Route path='/items' element={<AvailablesProducts/>}/>
-					<Route path='/items/:id' element={<ProductDetails/>}/>
-				</Route>
+				<Route path='/'/>
+				<Route path='/items' element={<SearchResult />} />
+				<Route path='/items/:id' element={<Details />} />
 				<Route path='*' element={<NoMatch />} />
 			</Routes>
-		</BrowserRouter>
-		</SearchProvider>
+		</Layout>
 	);
 }
 

@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom";
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom";
+
 import Card from "../UI/Card/Card"
 import ProductsItem from './ProductsItem';
 import classes from "./AvailablesProducts.module.css";
 import BreadCrumb from "../UI/BreadCrumb/BreadCrumb";
-import SearchContext from "../../store/SearchContext";
-import Spinner from "../Spinner/Spinner";
-import Errors from "../Errors/Errors";
+import Spinner from "../UI/Spinner/Spinner";
+import Errors from "../UI/Errors/Errors";
+
+import { searchItem } from "../../Services/Services";
 
 
 const AvailablesProducts = () => {
@@ -15,49 +17,39 @@ const AvailablesProducts = () => {
     const [dataCategories, setDataCategories] = useState([]);
     const [isLoadding, setIsLoadding] = useState(false);
     const [error, setError] = useState(null);
-    const [searchParams, setSearchParams] = useSearchParams();
 
-    const product = searchParams.get('search');
+    const location = useLocation();
 
-    const searchCtx = useContext(SearchContext)
+    const queryParams = new URLSearchParams(location.search)
+
+    const itemToSearch = queryParams.get('search')
 
     useEffect(() => {
 
         const searchItemHandler = async () => {
-            setDataItems([])
-            setIsLoadding(true)
-            setSearchParams({ search: searchCtx.product || product})
-            try {
-                const response = await fetch('http://localhost:4747/api/items', {
-                    method: 'POST',
-                    mode: 'cors',
-                    body: JSON.stringify({
-                        item: searchCtx.product || product,
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                })
-                if (!response.ok) {
-                    throw new Error(`Something went wrong, Error ${response.status}`)
-                }
-                const data = await response.json()
-                const dataItemsArray = data.items;
 
+            try {
+                setDataItems([])
+                setIsLoadding(true)
+                const response = await searchItem(itemToSearch)
+
+                const dataItemsArray = response.items
+                const categories = response.categories
                 if (dataItemsArray.length === 0) {
                     throw new Error('No hay publicaciones que coincidan con tu búsqueda.')
                 } else {
                     setDataItems(dataItemsArray)
-                    setDataCategories(data.categories)
+                    setDataCategories(categories)
                 }
             } catch (error) {
                 setError(error.message)
             }
             setIsLoadding(false)
         }
+
         searchItemHandler()
 
-    }, [searchCtx.product, setSearchParams, product])
+    }, [itemToSearch])
 
     const itemsList =
         <ul>{
@@ -87,11 +79,11 @@ const AvailablesProducts = () => {
     </>
 
     return (
-        <main>
+        <>
             {isLoadding ? <Spinner /> :
                 dataItems.length > 0 ? display :
-                    error ? <Errors message={error} />: ''}
-        </main>
+                    error ? <Errors message={error} /> : ''}
+        </>
     )
 }
 

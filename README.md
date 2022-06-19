@@ -49,46 +49,22 @@ En el frontend se utilizó como tecnología principal ReactJs, adicional se impl
 function App() {
 
 	return (
-		<SearchProvider>
-		<BrowserRouter>
+		<Layout>
 			<Routes>
-				<Route path='/' element={<Home/>}>
-					<Route path='/items' element={<AvailablesProducts/>}/>
-					<Route path='/items/:id' element={<ProductDetails/>}/>
-				</Route>
+				<Route path='/'/>
+				<Route path='/items' element={<SearchResult />} />
+				<Route path='/items/:id' element={<Details />} />
 				<Route path='*' element={<NoMatch />} />
 			</Routes>
-		</BrowserRouter>
-		</SearchProvider>
+		</Layout>
 	);
 }
-```
-Se implemento un Context para tener disponible de manera global el producto que ingresa el usuario en la barra de búsqueda, esto con el fin de poder utilizarlo en la segunda vista donde se cargan los productos que devuelve el servidor.
 
-```javascript
-const SearchProvider = props =>{
-    const [product, setProduct] = useState('')
-
-    const productTOSearch = (product) =>{
-        setProduct(product)
-    }
-
-    const searchContext = {
-        product: product,
-        ToSearch: productTOSearch
-    }
-
-    return(
-        <SearchContext.Provider value={searchContext}>
-            {props.children}
-        </SearchContext.Provider>
-    )
-}
 ```
 
 La primera vista se encuentra en el componente "SearchBar.jsx" nos permite ingresar el producto a buscar y ejecutar una búsqueda, se implementó validación para que solo se realice la búsqueda si se ingresan datos en el input, en esta vista se almacena en el Context el producto a buscar. 
 
-la segunda vista se encuentra en el componente "AvailablesProducts" nos muestra en pantalla la información consultada, cabe mencionar que solo se listan 4 productos pero esto es debido a la solicitud del requerimiento, desde el servidor se puede modificar la cantidad de ítems que se envían como respuesta al front, en esta vista se genera la url como se solicita en el requerimiento (Resultados de la búsqueda: “/items?search=”), y finaliza con el nombre del producto que ingresamos en la barra de búsqueda, en este punto se utilizó el dato almacenado en el Context para poder mediante el hook useSearchParams() generar la ruta, estando ubicados en esta vista si digitamos el nombre de otro producto en la URL por ejemplo (http://localhost:3000/items?search=iphone) nos traerá en pantalla los productos referentes a esa nueva búsqueda.
+la segunda vista se encuentra en el componente "AvailablesProducts" nos muestra en pantalla la información consultada, cabe mencionar que solo se listan 4 productos pero esto es debido a la solicitud del requerimiento, desde el servidor se puede modificar la cantidad de ítems que se envían como respuesta al front, en esta vista se genera la url como se solicita en el requerimiento (Resultados de la búsqueda: “/items?search=”), y finaliza con el nombre del producto que ingresamos en la barra de búsqueda.
 
 Los ítems listados en la vista de resultado de la búsqueda nos muestra información relacionada a cada producto, se muestra una imagen del producto, el precio según la divisa de cada producto, si este cuenta con envió gratis se mostrara un icono indicándolo y la ubicación, cada uno de los ítems listados se renderiza en un componente llamado "ProductsItem", este componente está habilitado para que el usuario haga click sobre él y se muestre la información detalla del producto en una tercera vista.
 
@@ -123,7 +99,7 @@ En el archivo server.js se detalla la lógica que se implementó en cada una de 
 
 Este desafío ha sido una de las experiencias mas gratificantes para mi, me permitió medir mis habilidades de lado del FrontEnd y del Backend, de igual forma el consumo de APIs entre ReactJs y el Servidor NodeJs.
 
-Uno de los mayores desafíos fue implementar el ReactRouter para poder controlar toda la aplicación como una SPA, luego de investigar y leer durante varias horas lo logre implementar de manera satisfactoria, otro gran desafío fue la construcción del archivo JSON que se debía enviar desde el servidor NodeJs al Front, investigue mediante la herramienta Postman todas respuestas que generaban los diferentes endpoints que se solicitan en el requerimiento, finalmente para las categorías que se muestran en la vista ProductDetails, decidi hacer un llamado a un tercer endpoind de la API de mercadolibre en el cual consultaba información referente a la categoría mediante el id de categoría recuperado del llamado al segundo endpoint (https://api.mercadolibre.com/items/:idproducto).
+Uno de los mayores desafíos  fue la construcción del archivo JSON que se debía enviar desde el servidor NodeJs al Front, investigue mediante la herramienta Postman todas respuestas que generaban los diferentes endpoints que se solicitan en el requerimiento, finalmente para las categorías que se muestran en la vista ProductDetails, decidi hacer un llamado a un tercer endpoind de la API de mercadolibre en el cual consultaba información referente a la categoría mediante el id de categoría recuperado del llamado al segundo endpoint (https://api.mercadolibre.com/items/:idproducto).
 
 Finalmente implemente algunas funcionalidades extras como los spinners de carga que se muestran mientras se consulta la data al servidor y se muestra en pantalla, pantallas que muestran errores que se pueden generar por problemas de conexión o si se consulta un ítem que no existe y finalmente un módulo de galería que permite ver en más detalle una serie de imágenes sobre el producto consultado.
 

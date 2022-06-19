@@ -1,23 +1,19 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import { useNavigate} from 'react-router-dom';
 import melilogo2X from '../../assets/Logo_ML@2x.png'
 import searchIcon from '../../assets/ic_Search.png'
-import SearchContext from '../../store/SearchContext';
-import classes from './SearchBar.module.css';
+import classes from './MainNavigation.module.css';
 
-const SearchBar = () => {
+const MainNavigation = () => {
 
     const [enteredInput, setEnteredInput] = useState('');
     const navigate = useNavigate();
-    const searchCtx = useContext(SearchContext);
 
     const submitHandler = event =>{
         event.preventDefault()
-
-        searchCtx.ToSearch(enteredInput)
-
+        
         if(enteredInput.trim() !== ''){
-            navigate('/items')
+            navigate(`/items?search=${enteredInput}`)
         }
         setEnteredInput('')
     }
@@ -54,4 +50,4 @@ const SearchBar = () => {
     )
 }
 
-export default SearchBar;
+export default MainNavigation;

@@ -117,7 +117,7 @@ app.post("/api/items", (req, res) => {
 // Endpoint para consultar el datalle de cada producto al seleccionarlo en la lista de productos de la vista 2
 // o al ingresar el id del producto directamente en la URL
 app.post("/id", (req, res) => {
-    const idReq = req.body.id
+    const idReq = req.body.item
 
     const getData = async () => {
 
@@ -202,7 +202,6 @@ app.post("/id", (req, res) => {
                     "item": { "id": 'Not Found' }
                 }
                 res.send(formatedResultsJSON);
-
             }
 
         } catch (error) {
