@@ -1,4 +1,4 @@
-import AvailablesProducts from "../Products/AvailablesProducts";
+import AvailablesProducts from "../components/Products/AvailablesProducts";
 
 
 const SearchResult = () =>{

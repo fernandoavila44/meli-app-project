@@ -1,7 +1,7 @@
 import { Routes, Route, } from "react-router-dom";
-import SearchResult from "./components/pages/SearchResult";
-import Details from "./components/pages/Details";
-import NoMatch from './components/pages/NoMatch'
+import SearchResult from "./pages/SearchResult";
+import Details from "./pages/Details";
+import NoMatch from './pages/NoMatch'
 import './App.css';
 import Layout from "./components/layout/Layout";
 

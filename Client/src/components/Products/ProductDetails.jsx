@@ -9,7 +9,7 @@ import GalleryImages from "../UI/GalleryImages/GalleryImages";
 import Spinner from "../UI/Spinner/Spinner";
 import Errors from "../UI/Errors/Errors";
 
-import { detailItem } from "../../Services/Services";
+import { detailItem } from "../../services/Services";
 
 const ProductDetails = () => {
 

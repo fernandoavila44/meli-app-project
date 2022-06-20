@@ -8,7 +8,7 @@ import BreadCrumb from "../UI/BreadCrumb/BreadCrumb";
 import Spinner from "../UI/Spinner/Spinner";
 import Errors from "../UI/Errors/Errors";
 
-import { searchItem } from "../../Services/Services";
+import { searchItem } from "../../services/Services";
 
 
 const AvailablesProducts = () => {
